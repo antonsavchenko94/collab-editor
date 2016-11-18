@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Roles } from 'meteor/alanning:roles';
 import { Accounts } from 'meteor/accounts-base';
+import { Documents } from '../../api/documents/documents';
 
 const users = [{
   email: 'admin@admin.com',
@@ -19,3 +20,4 @@ users.forEach(({ email, password, profile, roles }) => {
     Roles.addUsersToRoles(userId, roles);
   }
 });
+
