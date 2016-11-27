@@ -1,11 +1,15 @@
 import React from 'react';
-import { Jumbotron } from 'react-bootstrap';
-
-//import Editor from 'react-medium-editor';
-//import 'medium-editor/dist/css/medium-editor.css';
-//import 'medium-editor/dist/css/themes/default.css';
-import 'react-trumbowyg/dist/trumbowyg.min.css'
-import Trumbowyg from 'react-trumbowyg'
+import Editor from 'react-medium-editor';
+import 'medium-editor/dist/css/medium-editor.css';
+import 'medium-editor/dist/css/themes/default.css';
+import 'react-trumbowyg/dist/trumbowyg.min.css';
+import Trumbowyg from 'react-trumbowyg';
+import ReactSummernote from 'react-summernote';
+import '../../../node_modules/react-summernote/dist/react-summernote.css'; // import styles 
+import '../../../node_modules/bootstrap/js/modal';
+import '../../../node_modules/bootstrap/js/dropdown';
+import '../../../node_modules/bootstrap/js/tooltip';
+import '../../../node_modules/bootstrap/dist/css/bootstrap.css';
 
 class Index extends React.Component {
 	constructor(props) {
@@ -15,40 +19,50 @@ class Index extends React.Component {
 		this.state = { text: 'Fusce dapibus, tellus ac cursus commodo' };
 	}
 	handleChange(text, medium) {
-		console.log(event.target.innerText)
-    Meteor.call('updateText', event.target.innerText, this.props.thisDocument._id)
+    	Meteor.call('updateText', text.target.innerHTML, this.props.thisDocument._id)
   	}
-  	createDoc(text, medium) {
-    Meteor.call('createDoc', text);
-  	}
-  	shouldComponentUpdate(nextProps, nextState) {
-    // You can access `this.props` and `this.state` here
-    // This function should return a boolean, whether the component should re-render.
-    return false;
+  	createDoc() {
+
+    	Meteor.call('createDoc');
   	}
 	render() {
 		const { thisDocument } = this.props;
 		return <div className="Index">
-		<button onClick={this.createDoc}>click me</button>
+		{!thisDocument && <button onClick={this.createDoc}>create a doc</button>}
+		
 			        <h3>Editor #2</h3>
 			        {/*<Trumbowyg id='react-trumbowyg'/>*/}
-			        <Trumbowyg
+			       {thisDocument && thisDocument.title 
+			       	? <Trumbowyg
 			        	id='react-trumbowyg'
 				        buttons={
-				            [
-				                ['formatting'],
-				                'btnGrp-semantic',
-				                ['link'],
-				                ['insertImage'],
+				            [['formatting'], 'btnGrp-semantic', ['link'], ['insertImage'],
 				                'btnGrp-justify',
 				                'btnGrp-lists',
 				                ['fullscreen']
 				            ]
 				        }
-				        data={thisDocument.body}
+				        data={thisDocument && thisDocument.body ? thisDocument.body : ''}
 				        placeholder='Type your text!'
 				        onChange={this.handleChange} 
-				    />
+				    />: null}
+				    {/*<ReactSummernote
+					    value={thisDocument.body}
+					    options={{
+					      height: 350,
+					      dialogsInBody: true,
+				          toolbar: [
+				            ['style', ['style']],
+				            ['font', ['bold', 'underline', 'clear']],
+				            ['fontname', ['fontname']],
+				            ['para', ['ul', 'ol', 'paragraph']],
+				            ['table', ['table']],
+				            ['insert', ['link', 'picture', 'video']],
+				            ['view', ['fullscreen', 'codeview']]
+				          ]
+				        }}
+					    onChange={this.handleChange}
+					  />*/}
 			        {/*<Editor
 			          text={thisDocument.body}
 			          onChange={this.handleChange}

@@ -7,7 +7,7 @@ import Loading from '../components/Loading.js';
 const composer = (params, onData) => {
   const subscription = Meteor.subscribe('documents');
   if (subscription.ready()) {
-    const thisDocument = Documents.findOne({_id: 'sr8YSjKnYtzPCLzpr'});
+    const thisDocument = Documents.findOne({title: 'new doc'});
     onData(null, { thisDocument });
   }
 };

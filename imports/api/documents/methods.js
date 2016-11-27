@@ -5,14 +5,11 @@ import rateLimit from '../../modules/rate-limit.js';
 import { Meteor } from 'meteor/meteor'
 
 Meteor.methods({
-  'createDoc': function(text, docId){
-    check(text, String);
-    check(docId, String);
+  'createDoc': function(){
     let doc = {
       title: 'new doc',
-      body: text
     }
-    Documents.insert({_id: docId}, doc);
+    Documents.insert(doc);
   },
   'updateText': function(text, docId){
     check(text, String);

@@ -12,6 +12,7 @@ const users = [{
   roles: ['admin'],
 }];
 
+
 users.forEach(({ email, password, profile, roles }) => {
   const userExists = Meteor.users.findOne({ 'emails.address': email });
 
@@ -21,3 +22,12 @@ users.forEach(({ email, password, profile, roles }) => {
   }
 });
 
+
+/*const documents = Documents.find().fetch();
+
+if (!documents || documents.length > 0) {
+  let doc = {
+      title: 'new doc',
+    }
+    Documents.insert(doc);
+}*/
