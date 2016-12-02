@@ -2,6 +2,7 @@ import { SimpleSchema } from 'meteor/aldeed:simple-schema';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import Documents from './documents';
 import rateLimit from '../../modules/rate-limit.js';
+import {removeScripts} from '../../../lib/helpers';
 import { Meteor } from 'meteor/meteor'
 
 Meteor.methods({
@@ -14,6 +15,7 @@ Meteor.methods({
   'updateText': function(text, docId){
     check(text, String);
     check(docId, String);
+    text = removeScripts(text);
     let doc = {
       title: 'new doc',
       body: text
