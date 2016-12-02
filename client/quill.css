@@ -1,4 +1,4 @@
-/*!
+/*/
  * Quill Editor v1.0.0-beta.9
  * https://quilljs.com/
  * Copyright (c) 2014, Jason Chen
@@ -361,7 +361,7 @@
 }
 .ql-snow .ql-out-bottom,
 .ql-snow .ql-out-top {
-  visibility: hidden;
+  visibility: visible;
 }
 .ql-snow .ql-tooltip {
   position: absolute;

@@ -1,7 +1,5 @@
 import React from 'react';
 import ReactQuill from 'react-quill';
-import "../../../node_modules/quill/dist/quill.core.css";
-import "../../../node_modules/quill/dist/quill.snow.css";
 
 class Index extends React.Component {
 	constructor(props) {
@@ -13,32 +11,23 @@ class Index extends React.Component {
 	handleChange(text) {
     	Meteor.call('updateText', text, this.props.thisDocument._id)
   	}
-  	createDoc() {
 
+	createDoc() {
     	Meteor.call('createDoc');
   	}
 
 	render() {
 		const { thisDocument } = this.props;
 
-		const quillFormats = [ 
-		      "header",
-		      "bold", "italic", "underline", "strike", "blockquote",
-		      "list", "bullet", "indent",
-		      "link", "image" 
-		  ]
-
-		return <div className="Index">
+		return (<div className="Index">
 		{!thisDocument && <button onClick={this.createDoc}>create a doc</button>}
 		
 			        <h3>Editor #2</h3>
 				    <ReactQuill
-				    	formats={quillFormats}
-				    	value={thisDocument && thisDocument.body ? thisDocument.body : ''} 
-				    	onChange={this.handleChange}
-				    	theme="snow"
+				    	value={thisDocument && thisDocument.body ? thisDocument.body : ''}
+						onChange={this.handleChange}
 				    />
-			  </div>
+			  </div>)
 	}
 } 
 
